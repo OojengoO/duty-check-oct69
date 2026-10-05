@@ -46,7 +46,8 @@
 
             <button
                 onclick="openDateEdit()"
-                class="edit-button bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 px-3 py-2 rounded-xl text-sm font-medium transition">
+                class="edit-button bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 px-3 py-2 rounded-xl text-sm font-medium transition"
+                aria-label="แก้ไขวันที่">
                 <i class="fa-solid fa-pen"></i>
             </button>
         </div>
@@ -57,7 +58,7 @@
             </div>
 
             <div class="text-sm text-slate-500 mt-1">
-                แตะปุ่มดินสอเพื่อแก้ไขวันที่
+                เปลี่ยนวันที่เพื่อดูรายชื่อเวรประจำวัน
             </div>
         </div>
 
@@ -71,25 +72,21 @@
     <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
 
         <div class="px-5 py-4 border-b border-slate-100 bg-red-50">
-            <div class="flex items-center justify-between">
 
-                <div class="flex items-center gap-2">
-                    <span class="text-2xl">🔥</span>
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">🔥</span>
 
-                    <div>
-                        <div class="font-bold text-lg text-slate-900">
-                            นายทหารเวรดับเพลิง
-                        </div>
+                <div>
+                    <div class="font-bold text-lg text-slate-900">
+                        นายทหารเวรดับเพลิง
+                    </div>
+
+                    <div class="text-xs text-slate-500 mt-0.5">
+                        ข้อมูลตามตารางเวร ต.ค. 2569
                     </div>
                 </div>
-
-                <button
-                    onclick="openDutyEdit('fire')"
-                    class="edit-button text-blue-600 hover:bg-white px-3 py-2 rounded-xl text-sm">
-                    <i class="fa-solid fa-pen"></i>
-                </button>
-
             </div>
+
         </div>
 
         <div class="p-5">
@@ -111,31 +108,28 @@
 
         <div class="px-5 py-4 border-b border-slate-100 bg-amber-50">
 
-            <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
 
-                <div class="flex items-center gap-2">
-                    <span class="text-2xl">⚡</span>
+                <span class="text-2xl">⚡</span>
 
-                    <div>
-                        <div class="font-bold text-lg text-slate-900">
-                            เวรไฟฟ้า-ประปา
-                        </div>
+                <div>
+                    <div class="font-bold text-lg text-slate-900">
+                        เวรไฟฟ้า-ประปา
+                    </div>
 
-                        <a
-                            href="tel:52222"
-                            class="text-sm font-bold text-blue-600">
-                            ☎ 52222
-                        </a>
+                    <a
+                        href="tel:52222"
+                        class="text-sm font-bold text-blue-600">
+                        ☎ 52222
+                    </a>
+
+                    <div class="text-xs text-slate-500 mt-0.5">
+                        ข้อมูลตามตารางเวร ต.ค. 2569
                     </div>
                 </div>
 
-                <button
-                    onclick="openDutyEdit('electric')"
-                    class="edit-button text-blue-600 hover:bg-white px-3 py-2 rounded-xl text-sm">
-                    <i class="fa-solid fa-pen"></i>
-                </button>
-
             </div>
+
         </div>
 
         <div class="p-5">
@@ -144,9 +138,10 @@
                  class="text-xl font-bold text-slate-900">
             </div>
 
-            <a id="electricPhone"
-               class="phone-button mt-3 flex items-center justify-center gap-2 w-full bg-slate-900 hover:bg-slate-800 text-white rounded-xl py-3.5 text-lg font-bold transition">
-            </a>
+            <div
+                class="mt-3 flex items-center justify-center gap-2 w-full bg-slate-100 text-slate-600 border border-slate-200 rounded-xl py-3.5 text-base font-semibold">
+                ☎ ติดต่อเวรไฟฟ้า-ประปา 52222
+            </div>
 
         </div>
     </section>
@@ -278,7 +273,7 @@
     <div class="bg-white rounded-2xl w-full max-w-md p-5 shadow-xl">
 
         <h2 class="text-xl font-bold text-slate-900">
-            แก้ไขวันที่
+            เลือกวันที่
         </h2>
 
         <div class="mt-4">
@@ -290,7 +285,13 @@
             <input
                 type="date"
                 id="dateInput"
+                min="2026-10-01"
+                max="2026-10-31"
                 class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+            <div class="text-xs text-slate-500 mt-2">
+                เลือกได้เฉพาะวันที่ 1–31 ตุลาคม 2569
+            </div>
 
         </div>
 
@@ -305,74 +306,7 @@
             <button
                 onclick="saveDateEdit()"
                 class="flex-1 px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold">
-                บันทึก
-            </button>
-
-        </div>
-
-    </div>
-</div>
-
-
-<!-- Modal แก้ไขเวร -->
-<div
-    id="dutyModal"
-    class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-
-    <div class="bg-white rounded-2xl w-full max-w-md p-5 shadow-xl">
-
-        <h2
-            id="dutyModalTitle"
-            class="text-xl font-bold text-slate-900">
-            แก้ไขข้อมูลเวร
-        </h2>
-
-        <div class="mt-4 space-y-4">
-
-            <div>
-
-                <label class="block text-sm font-medium text-slate-600 mb-2">
-                    ชื่อ - สกุล
-                </label>
-
-                <input
-                    type="text"
-                    id="dutyNameInput"
-                    class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
-
-            </div>
-
-
-            <div>
-
-                <label class="block text-sm font-medium text-slate-600 mb-2">
-                    เบอร์โทรศัพท์
-                </label>
-
-                <input
-                    type="text"
-                    id="dutyPhoneInput"
-                    inputmode="tel"
-                    class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="เช่น 083-903-6838">
-
-            </div>
-
-        </div>
-
-
-        <div class="flex gap-2 mt-5">
-
-            <button
-                onclick="closeDutyEdit()"
-                class="flex-1 px-4 py-3 rounded-xl bg-slate-100 text-slate-700 font-medium">
-                ยกเลิก
-            </button>
-
-            <button
-                onclick="saveDutyEdit()"
-                class="flex-1 px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold">
-                บันทึก
+                แสดงเวร
             </button>
 
         </div>
@@ -391,29 +325,8 @@
 <script>
 
     /* =========================================================
-       ข้อมูลเริ่มต้น
-       ========================================================= */
-
-    const defaultData = {
-
-        date: "2026-10-05",
-
-        fire: {
-            name: "ว่าที่ ร.ท.วัฒนา แสงทรัพย์",
-            phone: "09 7136 3761"
-        },
-
-        electric: {
-            name: "พ.จ.ต.พรเทพ ศรีสังวาลย์",
-            phone: ""
-        }
-
-    };
-
-
-    /* =========================================================
-       ตารางนายทหารเวรดับเพลิง เดือน ต.ค. 2569
-       ข้อมูลตามตารางล่าสุด
+       ตารางเวร ต.ค. 2569
+       ข้อมูลชุดนี้เป็นแหล่งข้อมูลหลัก
        ========================================================= */
 
     const dutySchedule = {
@@ -608,31 +521,19 @@
 
 
     /* =========================================================
-       โหลดข้อมูล
+       วันที่ปัจจุบัน
+       LocalStorage เก็บเฉพาะวันที่
        ========================================================= */
 
-    const savedData = JSON.parse(
-        localStorage.getItem("dailyDutyAppData") || "null"
-    );
+    const DEFAULT_DATE = "2026-10-05";
+    const STORAGE_KEY = "dailyDutySelectedDate";
 
-    let appData = JSON.parse(JSON.stringify(defaultData));
-
-    /*
-     * เก็บเฉพาะวันที่จาก LocalStorage
-     * ไม่ให้ข้อมูลชื่อ/เบอร์เก่าทับตารางเวรใหม่
-     */
-    if (
-        savedData &&
-        /^\d{4}-\d{2}-\d{2}$/.test(savedData.date || "")
-    ) {
-        appData.date = savedData.date;
-    }
-
-    let currentDutyType = null;
+    let appDate =
+        localStorage.getItem(STORAGE_KEY) || DEFAULT_DATE;
 
 
     /* =========================================================
-       ชื่อวันภาษาไทย
+       วันและเดือนภาษาไทย
        ========================================================= */
 
     const thaiDays = [
@@ -663,82 +564,126 @@
 
 
     /* =========================================================
+       ตรวจวันที่
+       ========================================================= */
+
+    function isValidScheduleDate(dateString) {
+
+        return Object.prototype.hasOwnProperty.call(
+            dutySchedule,
+            dateString
+        );
+
+    }
+
+
+    /* =========================================================
        แปลงวันที่เป็นภาษาไทย
        ========================================================= */
 
     function formatThaiDate(dateString) {
 
-        const date = new Date(dateString + "T00:00:00");
+        const date =
+            new Date(dateString + "T00:00:00");
 
         if (isNaN(date.getTime())) {
             return "";
         }
 
-        const day = date.getDate();
-        const month = thaiMonths[date.getMonth()];
-        const year = date.getFullYear() + 543;
-        const weekday = thaiDays[date.getDay()];
+        const day =
+            date.getDate();
+
+        const month =
+            thaiMonths[date.getMonth()];
+
+        const year =
+            date.getFullYear() + 543;
+
+        const weekday =
+            thaiDays[date.getDay()];
 
         return `${weekday} ${day} ${month} ${year}`;
+
     }
 
 
     /* =========================================================
-       แสดงข้อมูล
+       แสดงข้อมูลจากตารางโดยตรง
+       ไม่มีข้อมูลเวรที่แก้ไขเอง
        ========================================================= */
 
     function renderApp() {
 
+        const duty =
+            dutySchedule[appDate];
+
+
         document.getElementById("displayDate").textContent =
-            formatThaiDate(appData.date);
+            formatThaiDate(appDate);
 
 
-        document.getElementById("fireName").textContent =
-            appData.fire.name || "ไม่มีรายชื่อระบุ";
-
+        const fireName =
+            document.getElementById("fireName");
 
         const firePhone =
             document.getElementById("firePhone");
 
-        const firePhoneText =
-            appData.fire.phone || "ไม่มีเบอร์โทร";
 
-        firePhone.textContent =
-            "📞 " + firePhoneText;
+        const electricName =
+            document.getElementById("electricName");
 
-        if (appData.fire.phone) {
-            firePhone.href =
-                "tel:" + normalizePhone(appData.fire.phone);
-        } else {
+
+        if (!duty) {
+
+            fireName.textContent =
+                "ไม่มีรายชื่อระบุ";
+
+            firePhone.textContent =
+                "📞 ไม่มีเบอร์โทร";
+
             firePhone.removeAttribute("href");
+
+            electricName.textContent =
+                "ไม่มีรายชื่อระบุ";
+
+            return;
         }
 
 
-        document.getElementById("electricName").textContent =
-            appData.electric.name || "ไม่มีรายชื่อระบุ";
+        /* นายทหารเวรดับเพลิง */
+
+        fireName.textContent =
+            duty.fire || "ไม่มีรายชื่อระบุ";
 
 
-        const electricPhone =
-            document.getElementById("electricPhone");
+        if (duty.firePhone) {
 
-        const electricPhoneText =
-            appData.electric.phone || "ไม่มีเบอร์โทร";
+            firePhone.textContent =
+                "📞 " + duty.firePhone;
 
-        electricPhone.textContent =
-            "📞 " + electricPhoneText;
+            firePhone.href =
+                "tel:" + normalizePhone(duty.firePhone);
 
-        if (appData.electric.phone) {
-            electricPhone.href =
-                "tel:" + normalizePhone(appData.electric.phone);
         } else {
-            electricPhone.removeAttribute("href");
+
+            firePhone.textContent =
+                "📞 ไม่มีเบอร์โทร";
+
+            firePhone.removeAttribute("href");
+
         }
+
+
+        /* เวรไฟฟ้า-ประปา */
+
+        electricName.textContent =
+            duty.electric || "ไม่มีรายชื่อระบุ";
 
     }
 
 
     /* =========================================================
-       ทำเบอร์ให้เหมาะกับ tel:
+       ทำเบอร์โทรให้เหมาะกับ tel:
        ========================================================= */
 
     function normalizePhone(phone) {
@@ -750,55 +695,7 @@
 
 
     /* =========================================================
-       เปลี่ยนชื่อและเบอร์เวรตามวันที่
-       ========================================================= */
-
-    function applyDutySchedule(dateString) {
-
-        const duty = dutySchedule[dateString];
-
-        appData.date = dateString;
-
-        if (!duty) {
-
-            appData.fire.name = "ไม่มีรายชื่อระบุ";
-            appData.fire.phone = "";
-
-            appData.electric.name = "ไม่มีรายชื่อระบุ";
-            appData.electric.phone = "";
-
-            saveData();
-            renderApp();
-
-            return;
-        }
-
-
-        appData.fire.name =
-            duty.fire || "ไม่มีรายชื่อระบุ";
-
-        appData.fire.phone =
-            duty.firePhone || "";
-
-
-        appData.electric.name =
-            duty.electric || "ไม่มีรายชื่อระบุ";
-
-
-        /*
-         * ไม่เปลี่ยนเบอร์ไฟฟ้า-ประปาอัตโนมัติ
-         * เพราะตารางที่มีอยู่เดิมไม่ได้ระบุเบอร์มือถือรายวัน
-         */
-
-
-        saveData();
-        renderApp();
-
-    }
-
-
-    /* =========================================================
-       เปิดแก้ไขวันที่
+       เปิดเลือกวันที่
        ========================================================= */
 
     function openDateEdit() {
@@ -806,7 +703,8 @@
         const dateInput =
             document.getElementById("dateInput");
 
-        dateInput.value = appData.date;
+        dateInput.value =
+            appDate;
 
 
         const modal =
@@ -817,6 +715,10 @@
 
     }
 
+
+    /* =========================================================
+       ปิดเลือกวันที่
+       ========================================================= */
 
     function closeDateEdit() {
 
@@ -829,135 +731,50 @@
     }
 
 
+    /* =========================================================
+       บันทึกวันที่
+       ========================================================= */
+
     function saveDateEdit() {
 
         const value =
             document.getElementById("dateInput").value;
 
+
         if (!value) {
+
             showToast("กรุณาเลือกวันที่");
+
             return;
         }
 
 
-        applyDutySchedule(value);
+        if (!isValidScheduleDate(value)) {
 
-        closeDateEdit();
+            showToast(
+                "กรุณาเลือกวันที่ 1–31 ตุลาคม 2569"
+            );
 
-        showToast("เปลี่ยนรายชื่อเวรตามวันที่แล้ว");
-
-    }
-
-
-    /* =========================================================
-       เปิดแก้ไขข้อมูลเวร
-       ========================================================= */
-
-    function openDutyEdit(type) {
-
-        currentDutyType = type;
-
-        const data =
-            appData[type];
-
-
-        document.getElementById("dutyNameInput").value =
-            data.name || "";
-
-
-        document.getElementById("dutyPhoneInput").value =
-            data.phone || "";
-
-
-        document.getElementById("dutyModalTitle").textContent =
-            type === "fire"
-                ? "แก้ไขนายทหารเวรดับเพลิง"
-                : "แก้ไขเวรไฟฟ้า-ประป";
-
-
-        const modal =
-            document.getElementById("dutyModal");
-
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
-
-
-        document.getElementById("dutyNameInput").focus();
-
-    }
-
-
-    function closeDutyEdit() {
-
-        const modal =
-            document.getElementById("dutyModal");
-
-        modal.classList.remove("flex");
-        modal.classList.add("hidden");
-
-        currentDutyType = null;
-
-    }
-
-
-    function saveDutyEdit() {
-
-        if (!currentDutyType) {
             return;
         }
 
 
-        const name =
-            document.getElementById("dutyNameInput")
-                .value
-                .trim();
+        appDate =
+            value;
 
 
-        const phone =
-            document.getElementById("dutyPhoneInput")
-                .value
-                .trim();
+        localStorage.setItem(
+            STORAGE_KEY,
+            appDate
+        );
 
-
-        if (!name) {
-            showToast("กรุณากรอกชื่อผู้ปฏิบัติเวร");
-            return;
-        }
-
-
-        if (!phone) {
-            showToast("กรุณากรอกเบอร์โทรศัพท์");
-            return;
-        }
-
-
-        appData[currentDutyType].name =
-            name;
-
-        appData[currentDutyType].phone =
-            phone;
-
-
-        saveData();
 
         renderApp();
 
-        closeDutyEdit();
+        closeDateEdit();
 
-        showToast("บันทึกข้อมูลเรียบร้อยแล้ว");
-
-    }
-
-
-    /* =========================================================
-       บันทึก LocalStorage
-       ========================================================= */
-
-    function saveData() {
-
-        localStorage.setItem(
-            "dailyDutyAppData",
-            JSON.stringify(appData)
+        showToast(
+            "แสดงรายชื่อเวรตามวันที่แล้ว"
         );
 
     }
@@ -965,21 +782,47 @@
 
     /* =========================================================
        คัดลอกประกาศ
+       ใช้ข้อมูลจากตารางโดยตรง
        ========================================================= */
 
     function copyDailyText() {
 
+        const duty =
+            dutySchedule[appDate];
+
+
+        if (!duty) {
+
+            showToast(
+                "ไม่พบข้อมูลเวรของวันที่เลือก"
+            );
+
+            return;
+        }
+
+
+        const fireName =
+            duty.fire || "ไม่มีรายชื่อระบุ";
+
+
+        const firePhone =
+            duty.firePhone || "ไม่มีเบอร์โทร";
+
+
+        const electricName =
+            duty.electric || "ไม่มีรายชื่อระบุ";
+
+
         const text =
 `🚨 รายชื่อเวรประจำวัน
-${formatThaiDate(appData.date)}
+${formatThaiDate(appDate)}
 
 🔥 นายทหารเวรดับเพลิง
-${appData.fire.name}
-📞 ${appData.fire.phone || "ไม่มีเบอร์โทร"}
+${fireName}
+📞 ${firePhone}
 
 ⚡ เวรไฟฟ้า-ประปา ☎ 52222
-${appData.electric.name}
-${appData.electric.phone ? "📞 " + appData.electric.phone : ""}
+${electricName}
 
 🛡️ น.เวรกอง รปภฯ สพ.ทร. ☎ 52344
 
@@ -1000,12 +843,19 @@ ${appData.electric.phone ? "📞 " + appData.electric.phone : ""}
             navigator.clipboard.writeText
         ) {
 
-            navigator.clipboard.writeText(text)
+            navigator.clipboard
+                .writeText(text)
                 .then(() => {
-                    showToast("คัดลอกประกาศเวรแล้ว");
+
+                    showToast(
+                        "คัดลอกประกาศเวรแล้ว"
+                    );
+
                 })
                 .catch(() => {
+
                     fallbackCopy(text);
+
                 });
 
         } else {
@@ -1026,26 +876,43 @@ ${appData.electric.phone ? "📞 " + appData.electric.phone : ""}
         const textarea =
             document.createElement("textarea");
 
-        textarea.value = text;
 
-        textarea.style.position = "fixed";
-        textarea.style.opacity = "0";
+        textarea.value =
+            text;
 
-        document.body.appendChild(textarea);
+
+        textarea.style.position =
+            "fixed";
+
+
+        textarea.style.opacity =
+            "0";
+
+
+        document.body.appendChild(
+            textarea
+        );
+
 
         textarea.select();
+
 
         try {
 
             document.execCommand("copy");
 
-            showToast("คัดลอกประกาศเวรแล้ว");
+            showToast(
+                "คัดลอกประกาศเวรแล้ว"
+            );
 
         } catch (error) {
 
-            showToast("ไม่สามารถคัดลอกข้อความได้");
+            showToast(
+                "ไม่สามารถคัดลอกข้อความได้"
+            );
 
         }
+
 
         textarea.remove();
 
@@ -1061,17 +928,27 @@ ${appData.electric.phone ? "📞 " + appData.electric.phone : ""}
         const toast =
             document.getElementById("toast");
 
+
         toast.textContent =
             message;
 
-        toast.classList.remove("hidden");
 
-        clearTimeout(window.toastTimer);
+        toast.classList.remove(
+            "hidden"
+        );
+
+
+        clearTimeout(
+            window.toastTimer
+        );
+
 
         window.toastTimer =
             setTimeout(() => {
 
-                toast.classList.add("hidden");
+                toast.classList.add(
+                    "hidden"
+                );
 
             }, 2200);
 
@@ -1086,10 +963,24 @@ ${appData.electric.phone ? "📞 " + appData.electric.phone : ""}
         "DOMContentLoaded",
         () => {
 
-            applyDutySchedule(appData.date);
+            if (!isValidScheduleDate(appDate)) {
 
-            document.getElementById("dateInput").value =
-                appData.date;
+                appDate =
+                    DEFAULT_DATE;
+
+                localStorage.setItem(
+                    STORAGE_KEY,
+                    appDate
+                );
+
+            }
+
+
+            document.getElementById(
+                "dateInput"
+            ).value =
+                appDate;
+
 
             renderApp();
 
