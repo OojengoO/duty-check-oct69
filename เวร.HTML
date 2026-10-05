@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายชื่อเวรประจำวัน</title>
+
+```
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    body {
+        font-family: 'Sarabun', sans-serif;
+    }
+
+    .phone-button {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .phone-button:active {
+        transform: scale(0.98);
+    }
+
+    .edit-button:active {
+        transform: scale(0.96);
+    }
+</style>
+```
+
+</head>
+
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+
+```
+<!-- Header -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-xl mx-auto px-4 py-4">
+
+        <div class="flex items-center justify-between">
+            <div>
+                <div class="text-xs font-semibold text-blue-600 mb-1">
+                    สพ.ทร.บางนา
+                </div>
+
+                <h1 class="text-2xl font-bold text-slate-900">
+                    🚨 รายชื่อเวรประจำวัน
+                </h1>
+            </div>
+
+            <button
+                onclick="openDateEdit()"
+                class="edit-button bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 px-3 py-2 rounded-xl text-sm font-medium transition">
+                <i class="fa-solid fa-pen"></i>
+            </button>
+        </div>
+
+        <!-- วันที่ -->
+        <div class="mt-4 bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3">
+            <div id="displayDate"
+                 class="text-xl font-bold text-slate-900">
+            </div>
+
+            <div class="text-sm text-slate-500 mt-1">
+                แตะปุ่มดินสอเพื่อแก้ไขวันที่
+            </div>
+        </div>
+
+    </div>
+</header>
+
+
+<!-- Main -->
+<main class="max-w-xl mx-auto px-4 py-5 space-y-4">
+
+    <!-- นายทหารเวรดับเพลิง -->
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+
+        <div class="px-5 py-4 border-b border-slate-100 bg-red-50">
+            <div class="flex items-center justify-between">
+
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">🔥</span>
+
+                    <div>
+                        <div class="font-bold text-lg text-slate-900">
+                            นายทหารเวรดับเพลิง
+                        </div>
+                    </div>
+                </div>
+
+                <button
+                    onclick="openDutyEdit('fire')"
+                    class="edit-button text-blue-600 hover:bg-white px-3 py-2 rounded-xl text-sm">
+                    <i class="fa-solid fa-pen"></i>
+                </button>
+
+            </div>
+        </div>
+
+        <div class="p-5">
+
+            <div id="fireName"
+                 class="text-xl font-bold text-slate-900">
+            </div>
+
+            <a id="firePhone"
+               class="phone-button mt-3 flex items-center justify-center gap-2 w-full bg-slate-900 hover:bg-slate-800 text-white rounded-xl py-3.5 text-lg font-bold transition">
+            </a>
+
+        </div>
+    </section>
+
+
+    <!-- เวรไฟฟ้า-ประปา -->
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+
+        <div class="px-5 py-4 border-b border-slate-100 bg-amber-50">
+
+            <div class="flex items-center justify-between">
+
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">⚡</span>
+
+                    <div>
+                        <div class="font-bold text-lg text-slate-900">
+                            เวรไฟฟ้า-ประปา
+                        </div>
+
+                        <a
+                            href="tel:52222"
+                            class="text-sm font-bold text-blue-600">
+                            ☎ 52222
+                        </a>
+                    </div>
+                </div>
+
+                <button
+                    onclick="openDutyEdit('electric')"
+                    class="edit-button text-blue-600 hover:bg-white px-3 py-2 rounded-xl text-sm">
+                    <i class="fa-solid fa-pen"></i>
+                </button>
+
+            </div>
+        </div>
+
+        <div class="p-5">
+
+            <div id="electricName"
+                 class="text-xl font-bold text-slate-900">
+            </div>
+
+            <a id="electricPhone"
+               class="phone-button mt-3 flex items-center justify-center gap-2 w-full bg-slate-900 hover:bg-slate-800 text-white rounded-xl py-3.5 text-lg font-bold transition">
+            </a>
+
+        </div>
+    </section>
+
+
+    <!-- หน่วยงานสำคัญ -->
+    <section class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+
+        <div class="px-5 py-4 bg-blue-50 border-b border-slate-100">
+            <div class="font-bold text-lg text-slate-900">
+                📞 หน่วยงานสำคัญ
+            </div>
+        </div>
+
+        <div class="p-4 space-y-3">
+
+            <a
+                href="tel:52344"
+                class="phone-button flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 transition">
+
+                <span class="font-semibold text-slate-800">
+                    🛡️ น.เวรกอง รปภฯ สพ.ทร.
+                </span>
+
+                <span class="font-bold text-blue-600">
+                    ☎ 52344
+                </span>
+            </a>
+
+
+            <a
+                href="tel:52205"
+                class="phone-button flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 transition">
+
+                <span class="font-semibold text-slate-800">
+                    🚚 เวรมว.ขนส่งฯ สพ.ทร.
+                </span>
+
+                <span class="font-bold text-blue-600">
+                    ☎ 52205
+                </span>
+            </a>
+
+
+            <a
+                href="tel:024752491"
+                class="phone-button flex items-center justify-between bg-slate-50 border border-slate-200 rounded-xl px-4 py-4 transition">
+
+                <span class="font-semibold text-slate-800">
+                    🚚 ขนส่ง กลน.กร.
+                </span>
+
+                <span class="font-bold text-blue-600">
+                    ☎ 02-475-2491
+                </span>
+            </a>
+
+        </div>
+    </section>
+
+
+    <!-- เบอร์ฉุกเฉิน -->
+    <section class="bg-white rounded-2xl border border-red-200 shadow-sm overflow-hidden">
+
+        <div class="px-5 py-4 bg-red-50 border-b border-red-100">
+
+            <div class="font-bold text-lg text-red-700">
+                🚨 เบอร์ฉุกเฉิน
+            </div>
+
+        </div>
+
+        <div class="p-4 space-y-3">
+
+            <div class="bg-red-50/60 border border-red-100 rounded-xl p-4">
+
+                <div class="font-semibold text-slate-900">
+                    นายทหารเวร ร.พ.กรุงเทพฯ (บางนา)
+                </div>
+
+                <a
+                    href="tel:0860677777"
+                    class="phone-button mt-3 flex items-center justify-center gap-2 w-full bg-red-600 hover:bg-red-700 text-white rounded-xl py-3.5 text-lg font-bold transition">
+                    📞 08-6067-7777
+                </a>
+
+            </div>
+
+
+            <div class="bg-red-50/60 border border-red-100 rounded-xl p-4">
+
+                <div class="font-semibold text-slate-900">
+                    การไฟฟ้า
+                </div>
+
+                <a
+                    href="tel:027693333"
+                    class="phone-button mt-3 flex items-center justify-center gap-2 w-full bg-red-600 hover:bg-red-700 text-white rounded-xl py-3.5 text-lg font-bold transition">
+                    ☎ 02-769-3333
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ปุ่มคัดลอก -->
+    <button
+        onclick="copyDailyText()"
+        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl py-4 text-lg font-bold shadow-sm transition">
+
+        <i class="fa-solid fa-copy mr-2"></i>
+        คัดลอกข้อความประกาศเวร
+    </button>
+
+
+    <div class="text-center text-xs text-slate-400 pb-5">
+        แตะหมายเลขโทรศัพท์เพื่อโทรออก
+    </div>
+
+</main>
+
+
+<!-- Modal แก้ไขวันที่ -->
+<div
+    id="dateModal"
+    class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+
+    <div class="bg-white rounded-2xl w-full max-w-md p-5 shadow-xl">
+
+        <h2 class="text-xl font-bold text-slate-900">
+            แก้ไขวันที่
+        </h2>
+
+        <div class="mt-4">
+
+            <label class="block text-sm font-medium text-slate-600 mb-2">
+                วันที่
+            </label>
+
+            <input
+                type="date"
+                id="dateInput"
+                class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+        </div>
+
+        <div class="flex gap-2 mt-5">
+
+            <button
+                onclick="closeDateEdit()"
+                class="flex-1 px-4 py-3 rounded-xl bg-slate-100 text-slate-700 font-medium">
+                ยกเลิก
+            </button>
+
+            <button
+                onclick="saveDateEdit()"
+                class="flex-1 px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold">
+                บันทึก
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Modal แก้ไขเวร -->
+<div
+    id="dutyModal"
+    class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+
+    <div class="bg-white rounded-2xl w-full max-w-md p-5 shadow-xl">
+
+        <h2
+            id="dutyModalTitle"
+            class="text-xl font-bold text-slate-900">
+            แก้ไขข้อมูลเวร
+        </h2>
+
+        <div class="mt-4 space-y-4">
+
+            <div>
+
+                <label class="block text-sm font-medium text-slate-600 mb-2">
+                    ชื่อ - สกุล
+                </label>
+
+                <input
+                    type="text"
+                    id="dutyNameInput"
+                    class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+            </div>
+
+
+            <div>
+
+                <label class="block text-sm font-medium text-slate-600 mb-2">
+                    เบอร์โทรศัพท์
+                </label>
+
+                <input
+                    type="text"
+                    id="dutyPhoneInput"
+                    inputmode="tel"
+                    class="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="เช่น 083-903-6838">
+
+            </div>
+
+        </div>
+
+
+        <div class="flex gap-2 mt-5">
+
+            <button
+                onclick="closeDutyEdit()"
+                class="flex-1 px-4 py-3 rounded-xl bg-slate-100 text-slate-700 font-medium">
+                ยกเลิก
+            </button>
+
+            <button
+                onclick="saveDutyEdit()"
+                class="flex-1 px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold">
+                บันทึก
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Toast -->
+<div
+    id="toast"
+    class="fixed left-1/2 -translate-x-1/2 bottom-6 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-lg text-sm font-medium hidden z-[60]">
+</div>
+```
+
+<script>
+
+    /* =========================================================
+       ข้อมูลเริ่มต้น
+       ========================================================= */
+
+    const defaultData = {
+
+        date: "2026-10-24",
+
+        fire: {
+            name: "ร.อ.วิเชียร ป้อมน้อย",
+            phone: "083-903-6838"
+        },
+
+        electric: {
+            name: "พ.จ.อ.ศุภชัย ทำมาก่อม",
+            phone: "082-172-7782"
+        }
+
+    };
+
+
+    /* =========================================================
+       ตารางเวรเดือน ต.ค. 2569
+       แหล่งข้อมูล: เวร กรช.ฯ เดือน ต.ค.69.pdf
+       เลือกวันที่แล้วระบบจะเปลี่ยนชื่อให้อัตโนมัติ
+       ========================================================= */
+
+    const dutySchedule = {
+        "2026-10-01": { fire: "ว่าที่ ร.ท.กิตติพร พุฒแย้ม", electric: "พ.จ.อ.สิทธิกรณ์ เชื้อโคกสูง" },
+        "2026-10-02": { fire: "ว่าที่ ร.ท.วัฒนา แสงทรัพย์", electric: "พ.จ.ท.ปัญญา ปราบพาล" },
+        "2026-10-03": { fire: "อะไหล่ นายทหารเวร", electric: "" },
+        "2026-10-04": { fire: "ร.อ.สานิกร ศรีปฏิมากร", electric: "" },
+        "2026-10-05": { fire: "ว่าที่ ร.ท.อรรถพล กลิ่นเกษร", electric: "พ.จ.ต.พรเทพ ศรีสังวาลย์" },
+        "2026-10-06": { fire: "ว่าที่ ร.ท.สามารถ ภักดิ์โสภา", electric: "พ.จ.ต.อภิสิทธิ์ ส่องเจริญ" },
+        "2026-10-07": { fire: "ว่าที่ ร.ท.กฤษณะ ประจักษ์จิตร์", electric: "จ.อ.สุรสิทธิ์ บุษบา" },
+        "2026-10-08": { fire: "ว่าที่ ร.ต.อดุล ค้ำคูณ", electric: "จ.อ.ประสิทธิ์ พวงขจร" },
+        "2026-10-09": { fire: "ว่าที่ ร.ต.อภิเชษฐ ศรีทอง", electric: "จ.อ.พิทักษ์ มีศิลป์" },
+        "2026-10-10": { fire: "", electric: "พ.จ.อ.กานต์ จารุวิมลรัตน์" },
+        "2026-10-11": { fire: "", electric: "" },
+        "2026-10-12": { fire: "ว่าที่ ร.ต.วิโรจน์ สิทธิมงคล", electric: "จ.อ.อนุวัฒน์ เงินเปีย" },
+        "2026-10-13": { fire: "", electric: "" },
+        "2026-10-14": { fire: "ร.อ.ธงชัย วิริยะ", electric: "พ.จ.อ.รุ่งเพ็ชร์ หงษ์ทอง" },
+        "2026-10-15": { fire: "ร.อ.มานะ ช่อทองดี", electric: "พ.จ.อ.สุภกิจ รุ่งเจริญ" },
+        "2026-10-16": { fire: "", electric: "" },
+        "2026-10-17": { fire: "ราชการ", electric: "" },
+        "2026-10-18": { fire: "ว่าที่ ร.ท.ธนะวัตติ์ ภูริวิวัฒน์สกุล", electric: "อจปร.อร.(ร.ล.ปัตตานี)" },
+        "2026-10-19": { fire: "ร.อ.สนทยา พึ่งเกษม", electric: "พ.จ.อ.กิตติศักดิ์ หุ่นสม" },
+        "2026-10-20": { fire: "ร.อ.มีชัย อันตะโก", electric: "พ.จ.อ.ศศิพงศ์ พงษ์ทิพย์พาที" },
+        "2026-10-21": { fire: "ร.อ.สัมฤทธิ์ ปั้นบุญชู", electric: "พ.จ.อ.กานต์ จารุวิมลรัตน์" },
+        "2026-10-22": { fire: "ร.อ.สานิกร ศรีปฏิมากร", electric: "พ.จ.อ.สันติชัย สิงหาพันธุ์" },
+        "2026-10-23": { fire: "", electric: "ว่าที่ ร.ต.เกียรติชัย พลายงาม" },
+        "2026-10-24": { fire: "", electric: "จ.อ.ชรัตน์ ช่างบรรจง" },
+        "2026-10-25": { fire: "", electric: "จ.ท.อินทัช กันต่าย" },
+        "2026-10-26": { fire: "ร.ท.ศิริวุฒิ ทองโชติ", electric: "พ.จ.อ.เศรษฐพงศ์ ศรีภูไฟ" },
+        "2026-10-27": { fire: "ร.ท.ศิริชัย อรุณสุข", electric: "พ.จ.อ.ธงชัย สระบัว" },
+        "2026-10-28": { fire: "ว่าที่ ร.ท.กิตติพร พุฒแย้ม", electric: "พ.จ.อ.สุภชัย วาพันสุ" },
+        "2026-10-29": { fire: "ว่าที่ ร.ท.วัฒนา แสงทรัพย์", electric: "พ.จ.อ.สิทธิกรณ์ เชื้อโคกสูง" },
+        "2026-10-30": { fire: "ว่าที่ ร.ท.อรรถพล กลิ่นเกษร", electric: "พ.จ.อ.เอกสโมสร มาสำราญ" },
+        "2026-10-31": { fire: "", electric: "พ.จ.อ.สัญญา อ้นโต" }
+    };
+
+
+    /* =========================================================
+       โหลดข้อมูล
+       ========================================================= */
+
+    let appData = JSON.parse(
+        localStorage.getItem("dailyDutyAppData")
+    ) || JSON.parse(JSON.stringify(defaultData));
+
+    // รองรับข้อมูลเก่าที่เก็บปี พ.ศ. เช่น 2569-10-24
+    if (/^25\d{2}-\d{2}-\d{2}$/.test(appData.date)) {
+        const parts = appData.date.split("-");
+        appData.date = (Number(parts[0]) - 543) + "-" + parts[1] + "-" + parts[2];
+    }
+
+
+    let currentDutyType = null;
+
+
+    /* =========================================================
+       ชื่อวันภาษาไทย
+       ========================================================= */
+
+    const thaiDays = [
+        "วันอาทิตย์",
+        "วันจันทร์",
+        "วันอังคาร",
+        "วันพุธ",
+        "วันพฤหัสบดี",
+        "วันศุกร์",
+        "วันเสาร์"
+    ];
+
+
+    const thaiMonths = [
+        "มกราคม",
+        "กุมภาพันธ์",
+        "มีนาคม",
+        "เมษายน",
+        "พฤษภาคม",
+        "มิถุนายน",
+        "กรกฎาคม",
+        "สิงหาคม",
+        "กันยายน",
+        "ตุลาคม",
+        "พฤศจิกายน",
+        "ธันวาคม"
+    ];
+
+
+    /* =========================================================
+       แปลงวันที่เป็นภาษาไทย
+       ========================================================= */
+
+    function formatThaiDate(dateString) {
+
+        const date = new Date(dateString + "T00:00:00");
+
+        if (isNaN(date.getTime())) {
+            return "";
+        }
+
+        const day = date.getDate();
+
+        const month = thaiMonths[date.getMonth()];
+
+        const year = date.getFullYear() + 543;
+
+        const weekday = thaiDays[date.getDay()];
+
+        return `${weekday} ${day} ${month} ${year}`;
+    }
+
+
+    /* =========================================================
+       แสดงข้อมูล
+       ========================================================= */
+
+    function renderApp() {
+
+        document.getElementById("displayDate").textContent =
+            formatThaiDate(appData.date);
+
+
+        document.getElementById("fireName").textContent =
+            appData.fire.name;
+
+        const firePhone = document.getElementById("firePhone");
+
+        firePhone.textContent =
+            "📞 " + appData.fire.phone;
+
+        firePhone.href =
+            "tel:" + normalizePhone(appData.fire.phone);
+
+
+        document.getElementById("electricName").textContent =
+            appData.electric.name;
+
+        const electricPhone =
+            document.getElementById("electricPhone");
+
+        electricPhone.textContent =
+            "📞 " + appData.electric.phone;
+
+        electricPhone.href =
+            "tel:" + normalizePhone(appData.electric.phone);
+
+    }
+
+
+    /* =========================================================
+       ทำเบอร์ให้เหมาะกับ tel:
+       ========================================================= */
+
+    function normalizePhone(phone) {
+
+        return String(phone)
+            .replace(/[^\d+]/g, "");
+
+    }
+
+
+    /* =========================================================
+       เปลี่ยนชื่อเวรตามวันที่เลือกอัตโนมัติ
+       ========================================================= */
+
+    function applyDutySchedule(dateString) {
+
+        const duty = dutySchedule[dateString];
+
+        if (!duty) {
+            appData.fire.name = "ไม่มีรายชื่อระบุ";
+            appData.electric.name = "ไม่มีรายชื่อระบุ";
+            saveData();
+            renderApp();
+            return;
+        }
+
+        appData.date = dateString;
+        appData.fire.name = duty.fire || "ไม่มีรายชื่อระบุ";
+        appData.electric.name = duty.electric || "ไม่มีรายชื่อระบุ";
+
+        saveData();
+        renderApp();
+
+    }
+
+
+    /* =========================================================
+       เปิดแก้ไขวันที่
+       ========================================================= */
+
+    function openDateEdit() {
+
+        const dateInput = document.getElementById("dateInput");
+
+        dateInput.value = appData.date;
+
+        const updateDutyByDate = () => {
+            const value = dateInput.value;
+            if (!value) return;
+
+            applyDutySchedule(value);
+            showToast("เปลี่ยนรายชื่อเวรตามวันที่แล้ว");
+        };
+
+        dateInput.oninput = updateDutyByDate;
+        dateInput.onchange = updateDutyByDate;
+
+        const modal =
+            document.getElementById("dateModal");
+
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+
+    }
+
+
+    function closeDateEdit() {
+
+        const modal =
+            document.getElementById("dateModal");
+
+        modal.classList.remove("flex");
+        modal.classList.add("hidden");
+
+    }
+
+
+    function saveDateEdit() {
+
+        const value =
+            document.getElementById("dateInput").value;
+
+        if (!value) {
+            showToast("กรุณาเลือกวันที่");
+            return;
+        }
+
+        appData.date = value;
+
+        applyDutySchedule(value);
+
+        renderApp();
+
+        closeDateEdit();
+
+        showToast("บันทึกวันที่เรียบร้อยแล้ว");
+
+    }
+
+
+    /* =========================================================
+       เปิดแก้ไขข้อมูลเวร
+       ========================================================= */
+
+    function openDutyEdit(type) {
+
+        currentDutyType = type;
+
+        const data = appData[type];
+
+        document.getElementById("dutyNameInput").value =
+            data.name;
+
+        document.getElementById("dutyPhoneInput").value =
+            data.phone;
+
+
+        document.getElementById("dutyModalTitle").textContent =
+            type === "fire"
+                ? "แก้ไขนายทหารเวรดับเพลิง"
+                : "แก้ไขเวรไฟฟ้า-ประปา";
+
+
+        const modal =
+            document.getElementById("dutyModal");
+
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+
+        document.getElementById("dutyNameInput").focus();
+
+    }
+
+
+    function closeDutyEdit() {
+
+        const modal =
+            document.getElementById("dutyModal");
+
+        modal.classList.remove("flex");
+        modal.classList.add("hidden");
+
+        currentDutyType = null;
+
+    }
+
+
+    function saveDutyEdit() {
+
+        if (!currentDutyType) {
+            return;
+        }
+
+        const name =
+            document.getElementById("dutyNameInput").value.trim();
+
+        const phone =
+            document.getElementById("dutyPhoneInput").value.trim();
+
+
+        if (!name) {
+            showToast("กรุณากรอกชื่อผู้ปฏิบัติเวร");
+            return;
+        }
+
+        if (!phone) {
+            showToast("กรุณากรอกเบอร์โทรศัพท์");
+            return;
+        }
+
+
+        appData[currentDutyType].name = name;
+
+        appData[currentDutyType].phone = phone;
+
+
+        saveData();
+
+        renderApp();
+
+        closeDutyEdit();
+
+        showToast("บันทึกข้อมูลเรียบร้อยแล้ว");
+
+    }
+
+
+    /* =========================================================
+       บันทึก LocalStorage
+       ========================================================= */
+
+    function saveData() {
+
+        localStorage.setItem(
+            "dailyDutyAppData",
+            JSON.stringify(appData)
+        );
+
+    }
+
+
+    /* =========================================================
+       คัดลอกประกาศ
+       ========================================================= */
+
+    function copyDailyText() {
+
+        const text =
+`🚨 รายชื่อเวรประจำวัน
+${formatThaiDate(appData.date)}
+
+🔥 นายทหารเวรดับเพลิง
+${appData.fire.name}
+📞 ${appData.fire.phone}
+
+⚡ เวรไฟฟ้า-ประปา ☎ 52222
+${appData.electric.name}
+📞 ${appData.electric.phone}
+
+🛡️ น.เวรกอง รปภฯ สพ.ทร. ☎ 52344
+
+🚚 เวรมว.ขนส่งฯ สพ.ทร. ☎ 52205
+
+🚚 ขนส่ง กลน.กร. ☎ 02-475-2491
+
+🚨 เบอร์ฉุกเฉิน
+นายทหารเวร ร.พ.กรุงเทพฯ (บางนา)
+📞 08-6067-7777
+
+การไฟฟ้า
+☎ 02-769-3333`;
+
+
+        if (navigator.clipboard &&
+            navigator.clipboard.writeText) {
+
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    showToast("คัดลอกประกาศเวรแล้ว");
+                })
+                .catch(() => {
+                    fallbackCopy(text);
+                });
+
+        } else {
+
+            fallbackCopy(text);
+
+        }
+
+    }
+
+
+    /* =========================================================
+       สำรองกรณี Clipboard API ใช้ไม่ได้
+       ========================================================= */
+
+    function fallbackCopy(text) {
+
+        const textarea =
+            document.createElement("textarea");
+
+        textarea.value = text;
+
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+
+        document.body.appendChild(textarea);
+
+        textarea.select();
+
+        try {
+
+            document.execCommand("copy");
+
+            showToast("คัดลอกประกาศเวรแล้ว");
+
+        } catch (error) {
+
+            showToast("ไม่สามารถคัดลอกข้อความได้");
+
+        }
+
+        textarea.remove();
+
+    }
+
+
+    /* =========================================================
+       Toast
+       ========================================================= */
+
+    function showToast(message) {
+
+        const toast =
+            document.getElementById("toast");
+
+        toast.textContent = message;
+
+        toast.classList.remove("hidden");
+
+        clearTimeout(window.toastTimer);
+
+        window.toastTimer =
+            setTimeout(() => {
+
+                toast.classList.add("hidden");
+
+            }, 2200);
+
+    }
+
+
+    /* =========================================================
+       เริ่มระบบ
+       ========================================================= */
+
+    window.addEventListener("DOMContentLoaded", () => {
+
+        const dateInput = document.getElementById("dateInput");
+
+        const updateDutyByDate = () => {
+            const value = dateInput.value;
+            if (!value) return;
+
+            applyDutySchedule(value);
+        };
+
+        dateInput.addEventListener("input", updateDutyByDate);
+        dateInput.addEventListener("change", updateDutyByDate);
+
+        applyDutySchedule(appData.date);
+        dateInput.value = appData.date;
+        renderApp();
+
+    });
+
+</script>
+
+</body>
+</html>
